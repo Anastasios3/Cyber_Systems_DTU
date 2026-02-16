@@ -3,7 +3,7 @@
 import sys
 import xmltodict
 
-print("Welcome to the FSMD simulator! - Version ?? - Designed by ??")
+print("Welcome to the FSMD simulator! - Version 1.0 - Designed by Group 17 | Anastasios Tatarakis | Pooya Zargari | Adam Popov |")
 
 if len(sys.argv) < 3:
     print('Too few arguments.')
@@ -238,9 +238,56 @@ print('\n---Start simulation---')
 
 ######################################
 ######################################
-# Write your code here!
+# Simulation loop
 ######################################
 ######################################
+
+repeat = True
+
+while cycle < iterations and repeat:
+
+    # ---- PART 2: Apply stimuli (set inputs for this cycle) ----
+    try:
+        if (not(fsmd_stim['fsmdstimulus']['setinput'] is None)):
+            for setinput in fsmd_stim['fsmdstimulus']['setinput']:
+                if type(setinput) is str:
+                    # Only one setinput element in the XML
+                    if int(fsmd_stim['fsmdstimulus']['setinput']['cycle']) == cycle:
+                        execute_setinput(fsmd_stim['fsmdstimulus']['setinput']['expression'])
+                    break
+                else:
+                    # More than one setinput element
+                    if int(setinput['cycle']) == cycle:
+                        execute_setinput(setinput['expression'])
+    except:
+        pass
+
+    # ---- PART 3: Print cycle trace (before transition) ----
+    print(f"\nCycle {cycle}:")
+    print(f"  Current state: {state}")
+    for var in variables:
+        print(f"  {var} = {variables[var]}")
+    for inp in inputs:
+        print(f"  {inp} = {inputs[inp]}")
+
+    # ---- PART 1: Evaluate transitions and update state ----
+    for transition in fsmd[state]:
+        if evaluate_condition(transition['condition']):
+            print(f"  Transition: {state} -> {transition['nextstate']} (condition: {transition['condition']}, instruction: {transition['instruction']})")
+            execute_instruction(transition['instruction'])
+            state = transition['nextstate']
+            break
+
+    # ---- PART 2: Check for end-state ----
+    try:
+        if (not(fsmd_stim['fsmdstimulus']['endstate'] is None)):
+            if state == fsmd_stim['fsmdstimulus']['endstate']:
+                print('\nEnd-state reached.')
+                repeat = False
+    except:
+        pass
+
+    cycle += 1
 
 print('\n---End of simulation---')
 
