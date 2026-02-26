@@ -3,9 +3,9 @@
 import sys
 import xmltodict
 
-print("Welcome to the FSMD simulator! - Version ?? - Designed by ??")
+print("Welcome to the FSMD simulator! - Group 17")
 
-if len(sys.argv) < 3:
+if len(sys.argv) < 3: # 3 arguments for us because --> python3 fsmd-sim.py 20 test_3/double_desc.xml test_3/double_stim.xml
     print('Too few arguments.')
     sys.exit(-1)
 elif (len(sys.argv) >4):
@@ -236,11 +236,70 @@ state = initial_state
 
 print('\n---Start simulation---')
 
-######################################
-######################################
-# Write your code here!
-######################################
-######################################
+
+#-------------------------------------------------------------------------------------------------------------------
+
+repeat = True
+state = initial_state
+while repeat and cycle < iterations:
+    print("\nCycle:", cycle, " State:", state)
+    print("  variables:", variables)
+    print("  inputs   :", inputs)
+    try:
+        if 'fsmdstimulus' in fsmd_stim and fsmd_stim['fsmdstimulus'].get('setinput') is not None:
+            raw_si = fsmd_stim['fsmdstimulus']['setinput']
+            if isinstance(raw_si, dict) or isinstance(raw_si, str):
+                set_inputs = [raw_si]
+            else:
+                set_inputs = raw_si
+
+            for si in set_inputs:
+                si_cycle = int(si['cycle'])
+                si_expr  = si['expression']
+
+                if si_cycle == cycle:
+                    execute_setinput(si_expr)
+    except Exception as e:
+        pass
+    transition_taken = False
+
+    for tr in fsmd[state]:
+        cond_str = tr['condition']
+
+        if evaluate_condition(cond_str):
+            instr_str = tr['instruction']
+            next_state = tr['nextstate']
+
+            execute_instruction(instr_str)
+
+            print("  taking transition:",
+                  "condition =", cond_str,
+                  "instruction =", instr_str,
+                  "next_state =", next_state)
+
+            state = next_state
+            transition_taken = True
+            break
+    if not transition_taken:
+        print("  ERROR: no valid transition from state", state)
+        repeat = False
+    try:
+        if 'fsmdstimulus' in fsmd_stim and fsmd_stim['fsmdstimulus'].get('endstate') is not None:
+            end_obj = fsmd_stim['fsmdstimulus']['endstate']
+            end_state_name = end_obj
+
+            if state == end_state_name:
+                print("End-state reached.")
+                repeat = False
+    except Exception as e:
+        pass
+    cycle = cycle + 1
+
+print("\nSimulation finished after", cycle, "cycles.")
+print("Final variables:", variables)
+
+
+#-------------------------------------------------------------------------------------------------------------------
 
 print('\n---End of simulation---')
 

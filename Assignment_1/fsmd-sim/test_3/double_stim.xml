@@ -1,0 +1,25 @@
+<fsmdstimulus>
+
+  <setinput>
+    <cycle>0</cycle>
+    <expression>in_A = 1000</expression>
+  </setinput>
+
+  <setinput>
+    <cycle>0</cycle>
+    <expression>in_B = 100</expression>
+  </setinput>
+
+  <setinput>
+    <cycle>1</cycle>
+    <expression>in_A = 0</expression>
+  </setinput>
+
+  <setinput>
+    <cycle>1</cycle>
+    <expression>in_B = 0</expression>
+  </setinput>
+
+  <endstate>DONE</endstate>
+
+</fsmdstimulus>
