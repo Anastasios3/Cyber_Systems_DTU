@@ -11,3 +11,16 @@ The FSMD (Finite State Machine with Datapath) project
 - 3rd Cycle by cycle run. each cycle select the transition, execute update and advance the counter. A simpler CRUD in other words.
 
 - 4th test folder have three different FSMD instances to verify it works properly.
+
+#-------------------------------------------------------------------------------------------
+Final report formatting
+
+1. Intor (1/2 page)
+
+2. FSMD model background (1/2 to 1 page)
+
+3. The architecture of the simulator (2 to 3 pages)
+
+4. Tests 1,2, and 3 (1_1/2 to 2 pages)
+
+5. Discusiion on limitations and thoughts in general ( 1/2 page)
