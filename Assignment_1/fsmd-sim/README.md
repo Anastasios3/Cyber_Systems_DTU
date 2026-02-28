@@ -7,3 +7,5 @@ The FSMD (Finite State Machine with Datapath) project
 - 3rd Cycle by cycle run. each cycle select the transition, execute update and advance the counter. A simpler CRUD in other words.
 
 - 4th test folder have three different FSMD instances to verify it works properly.
+
+python3 fsmd-sim.py <number_of_cycles> <description_file> [stimuli_file_optional]

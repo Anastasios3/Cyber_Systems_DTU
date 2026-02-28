@@ -1,6 +1,6 @@
 # Cyber_Systems_DTU
 
-About Assignment_1
+# About Assignment_1
 
 The FSMD (Finite State Machine with Datapath) project
 
@@ -24,3 +24,5 @@ Final report formatting
 4. Tests 1,2, and 3 (1_1/2 to 2 pages)
 
 5. Discusiion on limitations and thoughts in general ( 1/2 page)
+
+python3 fsmd-sim.py <number_of_cycles> <description_file> [stimuli_file_optional]
