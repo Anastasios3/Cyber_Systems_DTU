@@ -1,0 +1,30 @@
+# Sum 4 values, flag if >50
+0: LI R1, 0; # index starts at 0
+1: LI R2, 4; # loop limit
+2: LI R5, 0; # accumulator
+3: LI R6, 11; # exit jump target
+4: JEQ R6, R1, R2; # exit if done
+5: LD R3, R1; # load current value
+6: ADD R5, R5, R3; # add to total
+7: LI R4, 1; # increment step
+8: ADD R1, R1, R4; # next index
+9: LI R6, 3; # loop back target
+10: JR R6; # jump to loop top
+11: LI R2, 10; # sum store address
+12: SD R5, R2; # store sum
+13: LI R7, 50; # threshold value
+14: LI R8, 0; # default flag=0
+15: LI R9, 19; # jump if above 50
+16: JLT R9, R7, R5; # 50 < sum?
+17: LI R9, 20; # skip flag setter
+18: JR R9; # jump over line 19
+19: LI R8, 1; # flag=1 sum>50
+20: LI R2, 11; # flag store address
+21: SD R8, R2; # store flag
+22: LI R10, 60; # first test value
+23: LI R11, 15; # second test value
+24: AND R12, R10, R11; # 60 & 15 = 12
+25: OR R13, R10, R11; # 60 | 15 = 63
+26: NOT R14, R11; # ~15 = 240
+27: NOP; # one idle cycle
+28: END; # stop simulation
