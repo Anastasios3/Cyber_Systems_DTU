@@ -322,62 +322,61 @@ while current_cycle < max_cycles:
 
     jumped = False
 
-    if opcode == 'END':
+    if opcode == 'END': # End program
         current_cycle += 1
         break
-    elif opcode == 'NOP':
+    elif opcode == 'NOP': # No operation, consume one cycle but do nothing
         pass
-    elif opcode == 'ADD':
+    elif opcode == 'ADD': # R[op1] = R[op2] + R[op3]
         val2 = registerFile.read_register(op2)
         val3 = registerFile.read_register(op3)
         result = val2 + val3
         registerFile.write_register(op1, result)
-    elif opcode == 'SUB':
+    elif opcode == 'SUB': # R[op1] = R[op2] - R[op3]
         val2 = registerFile.read_register(op2)
         val3 = registerFile.read_register(op3)
         result = val2 - val3
         registerFile.write_register(op1, result)
-    elif opcode == 'OR':
+    elif opcode == 'OR': # R[op1] = R[op2] | R[op3]
         val2 = registerFile.read_register(op2)
         val3 = registerFile.read_register(op3)
         result = val2 | val3
         registerFile.write_register(op1, result)
-    elif opcode == 'AND':
+    elif opcode == 'AND': # R[op1] = R[op2] & R[op3]
         val2 = registerFile.read_register(op2)
         val3 = registerFile.read_register(op3)
         result = val2 & val3
         registerFile.write_register(op1, result)
-    elif opcode == 'NOT':
+    elif opcode == 'NOT': # % 256 Converts signed result to 8 bit unassigned
         val2 = registerFile.read_register(op2)
         result = (~val2) % 256
         registerFile.write_register(op1, result)
-    elif opcode == 'LI':
+    elif opcode == 'LI': # Load the literal integer op2 directly into R[op1]
         registerFile.write_register(op1, int(op2))
-    elif opcode == 'LD':
+    elif opcode == 'LD': # address comes from a register value
         address = registerFile.read_register(op2)
-        value = dataMemory.read_memory(address)
+        value = dataMemory.read_data(address)
         registerFile.write_register(op1, value)
-    elif opcode == 'SD':
+    elif opcode == 'SD': # store register value into memory
         address = registerFile.read_register(op2)
         value = registerFile.read_register(op1)
-        dataMemory.write_memory(address, value)
-    elif opcode == 'JR':
+        dataMemory.write_data(address, value)
+    elif opcode == 'JR': # unconditional jump, set PC to R[op1]
         program_counter = registerFile.read_register(op1)
         jumped = True
-    elif opcode == 'JEQ':
+    elif opcode == 'JEQ': # jump if equal, otherwise continue
         val2 = registerFile.read_register(op2)
         val3 = registerFile.read_register(op3)
         if val2 == val3:
             program_counter = registerFile.read_register(op1)
             jumped = True
-    elif opcode == 'JLT':
+    elif opcode == 'JLT': # jump if less than otherwise continue
         val2 = registerFile.read_register(op2)
         val3 = registerFile.read_register(op3)
         if val2 < val3:
             program_counter = registerFile.read_register(op1)
-            jumped = True
-    
-    else:
+            jumped = True   
+    else: #abort if unknown opcode
         print(f'Unknown opcode: {opcode}')
         sys.exit(-1)
 
@@ -389,7 +388,7 @@ while current_cycle < max_cycles:
 
 registerFile.print_all()
 dataMemory.print_used()
-print(f'Executes in #{current_cycle} cycles')
+print(f'Executes in #{current_cycle} cycles.')
 
 ####################################
 
