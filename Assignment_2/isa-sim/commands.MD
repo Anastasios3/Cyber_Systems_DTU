@@ -9,3 +9,7 @@
 # Run Test 2
 
 --- python isa-sim.py 500 ./test_2/program_2.txt ./test_2/data_mem_2.txt
+
+# Run Test 3
+
+--- python isa-sim.py 200 ./test_3/program_3.txt ./test_3/data_mem_3.txt

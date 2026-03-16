@@ -181,7 +181,7 @@ class InstructionMemory:
         file_content = re.sub(r'#.*?\n', '', file_content)
         file_content = re.sub(r'#.*? ', '', file_content)
         file_content = re.sub(r'\s*[\n\t]+\s*', '', file_content)
-        file_content = re.sub('\s\s+', ' ',  file_content)
+        file_content = re.sub(r'\s\s+', ' ',  file_content)
         file_content = file_content.replace(': ', ':')
         file_content = file_content.replace(' :', ':')
         file_content = file_content.replace(', ', ',')
