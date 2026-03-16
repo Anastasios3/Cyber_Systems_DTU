@@ -1,7 +1,7 @@
 import sys
 import re
 
-print("\nWelcome to the ISA simulator! - Designed by <YOUR NAMES HERE>")
+print("\nWelcome to the ISA simulator! - Designed by Group 17 - Anastasios Tatarakis || Pooya Zargari || Adam Popov")
 
 if len(sys.argv) < 4:
     print('Too few arguments.')
@@ -310,7 +310,87 @@ instructionMemory = InstructionMemory()
 print('\n---Start of simulation---')
 
 #####################################
-##      Write your code here      ##
+while current_cycle < max_cycles:
+
+    opcode = instructionMemory.read_opcode(program_counter)
+    op1 = instructionMemory.read_operand_1(program_counter)
+    op2 = instructionMemory.read_operand_2(program_counter)
+    op3 = instructionMemory.read_operand_3(program_counter)
+
+    print(f'Cycle {current_cycle} | PC = {program_counter} | ', end='')
+    instructionMemory.print_instruction(program_counter)
+
+    jumped = False
+
+    if opcode == 'END':
+        current_cycle += 1
+        break
+    elif opcode == 'NOP':
+        pass
+    elif opcode == 'ADD':
+        val2 = registerFile.read_register(op2)
+        val3 = registerFile.read_register(op3)
+        result = val2 + val3
+        registerFile.write_register(op1, result)
+    elif opcode == 'SUB':
+        val2 = registerFile.read_register(op2)
+        val3 = registerFile.read_register(op3)
+        result = val2 - val3
+        registerFile.write_register(op1, result)
+    elif opcode == 'OR':
+        val2 = registerFile.read_register(op2)
+        val3 = registerFile.read_register(op3)
+        result = val2 | val3
+        registerFile.write_register(op1, result)
+    elif opcode == 'AND':
+        val2 = registerFile.read_register(op2)
+        val3 = registerFile.read_register(op3)
+        result = val2 & val3
+        registerFile.write_register(op1, result)
+    elif opcode == 'NOT':
+        val2 = registerFile.read_register(op2)
+        result = (~val2) % 256
+        registerFile.write_register(op1, result)
+    elif opcode == 'LI':
+        registerFile.write_register(op1, int(op2))
+    elif opcode == 'LD':
+        address = registerFile.read_register(op2)
+        value = dataMemory.read_memory(address)
+        registerFile.write_register(op1, value)
+    elif opcode == 'SD':
+        address = registerFile.read_register(op2)
+        value = registerFile.read_register(op1)
+        dataMemory.write_memory(address, value)
+    elif opcode == 'JR':
+        program_counter = registerFile.read_register(op1)
+        jumped = True
+    elif opcode == 'JEQ':
+        val2 = registerFile.read_register(op2)
+        val3 = registerFile.read_register(op3)
+        if val2 == val3:
+            program_counter = registerFile.read_register(op1)
+            jumped = True
+    elif opcode == 'JLT':
+        val2 = registerFile.read_register(op2)
+        val3 = registerFile.read_register(op3)
+        if val2 < val3:
+            program_counter = registerFile.read_register(op1)
+            jumped = True
+    
+    else:
+        print(f'Unknown opcode: {opcode}')
+        sys.exit(-1)
+
+
+    if not jumped:
+        program_counter += 1
+
+    current_cycle += 1
+
+registerFile.print_all()
+dataMemory.print_used()
+print(f'Executes in #{current_cycle} cycles')
+
 ####################################
 
 print('\n---End of simulation---\n')
