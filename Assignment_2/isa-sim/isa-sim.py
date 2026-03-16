@@ -309,7 +309,7 @@ instructionMemory = InstructionMemory()
 
 print('\n---Start of simulation---')
 
-#####################################
+##################################### --- START
 while current_cycle < max_cycles:
 
     opcode = instructionMemory.read_opcode(program_counter)
@@ -390,6 +390,6 @@ registerFile.print_all()
 dataMemory.print_used()
 print(f'Executes in #{current_cycle} cycles.')
 
-####################################
+################################### --- END
 
 print('\n---End of simulation---\n')
