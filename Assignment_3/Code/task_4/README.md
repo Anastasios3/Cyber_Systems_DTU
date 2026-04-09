@@ -24,3 +24,5 @@
 # Link to video bellow
 
 https://panopto.dtu.dk/Panopto/Pages/Viewer.aspx?id=4d123f00-a304-4143-9295-b42701439ef5
+
+(I know the assignment said yellow, but because I wanted the differenciation to be more optically recognisable, I made it blue)

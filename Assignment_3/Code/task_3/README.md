@@ -14,4 +14,4 @@ The rest of the wiring stays the same as before.
 
 # Link to video bellow
 
-https://panopto.dtu.dk/Panopto/Pages/Viewer.aspx?id=e18053a9-3718-4dfe-9709-b427011738b1
+https://panopto.dtu.dk/Panopto/Pages/Viewer.aspx?id=e06314ad-bd08-4aa7-bab4-b427014dc679
