@@ -1,6 +1,6 @@
 # Note
 
-The rest of the wiring stays the same as before
+The rest of the wiring stays the same as before.
 
 # LEDs
 
