@@ -1,4 +1,5 @@
-# Wiring (propably forgot to make some adjustments while re-wiring, but it's pretty close to perfect)
+# Wiring 
+(propably forgot to make some adjustments while re-wiring, but it's pretty close to perfect)
 
 # Button
 
