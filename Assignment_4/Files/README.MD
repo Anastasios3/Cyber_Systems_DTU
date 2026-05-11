@@ -1,4 +1,4 @@
-# Wiring
+# Wiring (propably forgot to make some adjustments while re-wiring, but it's pretty close to perfect)
 
 # Button
 
@@ -38,16 +38,16 @@
 
 # URLs
 
-http://192.168.4.1/pins
-http://192.168.4.1/sensors
-http://192.168.4.1/pin/led
-http://192.168.4.1/sensor/temp
-http://192.168.4.1/sensor/pot
-http://192.168.4.1/pin/led/set/high
-http://192.168.4.1/pin/led/set/low
-http://192.168.4.1/rgb/1/0/0
-http://192.168.4.1/rgb/0/1/0
-http://192.168.4.1/rgb/0/0/1
+1. http://192.168.4.1/pins
+2. http://192.168.4.1/sensors
+3. http://192.168.4.1/pin/led
+4. http://192.168.4.1/sensor/temp
+5. http://192.168.4.1/sensor/pot
+6. http://192.168.4.1/pin/led/set/high
+7. http://192.168.4.1/pin/led/set/low
+8. http://192.168.4.1/rgb/1/0/0
+9. http://192.168.4.1/rgb/0/1/0
+10. http://192.168.4.1/rgb/0/0/1
 
 # Commands
 
